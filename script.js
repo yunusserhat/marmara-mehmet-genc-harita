@@ -25,7 +25,5 @@ fetch('kampus.geojson')
     // Kampüs sınırları dışına çıkışı engellemek için maxBoundsViscosity kullan (haritayı geri ittirir)
     map.setMaxBounds(kampusLayer.getBounds().pad(0.1));
 
-    // İstersen pop-up ekle
-    kampusLayer.bindPopup('Marmara Üniversitesi Mehmet Genç Külliyesi').openPopup();
 })
 .catch(error => console.log('GeoJSON yüklenirken hata oluştu:', error));
