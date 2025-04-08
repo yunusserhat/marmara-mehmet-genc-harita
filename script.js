@@ -18,12 +18,14 @@ fetch('kampus.geojson')
         }
     }).addTo(map);
 
-    // GeoJSON katmanının sınırlarını al ve haritayı buraya sınırla
     map.fitBounds(kampusLayer.getBounds());
-    map.setMaxBounds(kampusLayer.getBounds());
+    map.setMaxBounds(kampusLayer.getBounds().pad(1.5));
+  })
+  .catch(error => console.log('GeoJSON yüklenirken hata oluştu:', error));
 
-    // Kampüs sınırları dışına çıkışı engellemek için maxBoundsViscosity kullan (haritayı geri ittirir)
-    map.setMaxBounds(kampusLayer.getBounds().pad(0.1));
-
-})
-.catch(error => console.log('GeoJSON yüklenirken hata oluştu:', error));
+// 👇 Harita yüklemesi bittikten sonra boyutu yeniden kontrol et
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        map.invalidateSize();
+    }, 500);
+});
